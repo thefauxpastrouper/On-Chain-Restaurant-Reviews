@@ -1,73 +1,74 @@
-# Welcome to your Lovable project
+# On-Chain Restaurant Reviews 🍽️
 
-## Project info
+A decentralized web application (dApp) that allows users to create and register restaurants, and receive reviews from other users — all stored **on-chain** for transparency and immutability.
 
-**URL**: https://lovable.dev/projects/f1f6dbf2-af9d-4445-8c6e-44dcff5a8dd8
+---
 
-## How can I edit this code?
+## Table of Contents
 
-There are several ways of editing your application.
+- [Introduction](#introduction)  
+- [Features](#features)  
+- [Architecture & Tech Stack](#architecture--tech-stack)  
+- [Getting Started](#getting-started)  
+  - [Prerequisites](#prerequisites)  
+  - [Installation](#installation)  
+  - [Running Locally](#running-locally)  
+- [Usage](#usage)  
+- [Deployment](#deployment)  
+- [Folder Structure](#folder-structure)  
+- [Future Improvements](#future-improvements)  
+- [Contributing](#contributing)  
+- [License](#license)  
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/f1f6dbf2-af9d-4445-8c6e-44dcff5a8dd8) and start prompting.
+## Introduction
 
-Changes made via Lovable will be committed automatically to this repo.
+On-Chain Restaurant Reviews is a blockchain-powered review platform where:
 
-**Use your preferred IDE**
+- Restaurant owners or users can **register a restaurant** on-chain.  
+- Other users can submit **reviews**, ratings, comments, etc.  
+- All data is stored on the blockchain, ensuring transparency, immutability, and censorship resistance.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+This model replaces traditional centralized review sites by putting control and trust in the hands of users and smart contracts.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+---
 
-Follow these steps:
+## Features
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- Create/Register restaurants on-chain  
+- Submit reviews for restaurants  
+- Immutable and transparent storage of reviews  
+- Frontend UI using modern React + TypeScript  
+- Tailwind CSS + shadcn-ui for styling and component library  
+- Vite as build tool and dev server  
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+---
 
-# Step 3: Install the necessary dependencies.
-npm i
+## Architecture & Tech Stack
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+- **Frontend**: React, TypeScript, Vite  
+- **UI / Styling**: Tailwind CSS, shadcn-ui  
+- **Smart Contracts / On-chain Logic**: (Assumed) Ethereum / EVM compatible chain  
+- **Configuration / Build**:  
+  - `tsconfig.*.json`  
+  - `vite.config.ts`  
+  - `tailwind.config.ts`  
+  - `postcss.config.js`  
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Getting Started
 
-**Use GitHub Codespaces**
+### Prerequisites
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- Node.js (v16+)  
+- npm or yarn  
+- (Optional) A local blockchain / testnet / wallet to interact with the smart contracts  
 
-## What technologies are used for this project?
+### Installation
 
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/f1f6dbf2-af9d-4445-8c6e-44dcff5a8dd8) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+```bash
+git clone https://github.com/thefauxpastrouper/On-Chain-Restaurant-Reviews.git
+cd On-Chain-Restaurant-Reviews
+npm install
