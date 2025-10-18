@@ -96,7 +96,7 @@ export const RestaurantDropdown: React.FC<RestaurantDropdownProps> = ({
               {selectedRestaurant ? (
                 <div className="flex items-center gap-2 truncate">
                   <Building2 className="w-4 h-4 text-primary" />
-                  <span className="truncate">{selectedRestaurant.name}</span>
+                  <span className="truncate text-foreground font-medium">{selectedRestaurant.name}</span>
                   <span className="text-xs text-muted-foreground">
                     ({selectedRestaurant.pubkey.toBase58().slice(0, 8)}...)
                   </span>
@@ -126,12 +126,12 @@ export const RestaurantDropdown: React.FC<RestaurantDropdownProps> = ({
                         key={pubkey}
                         value={`${restaurant.name} ${pubkey}`}
                         onSelect={() => handleSelect(pubkey)}
-                        className="flex items-center justify-between p-3"
+                        className="flex items-center justify-between p-3 hover:bg-accent/10 focus:bg-accent/10"
                       >
                         <div className="flex items-center gap-3 flex-1 min-w-0">
                           <Building2 className="w-4 h-4 text-primary flex-shrink-0" />
                           <div className="flex-1 min-w-0">
-                            <div className="font-medium truncate">{restaurant.name}</div>
+                            <div className="font-medium truncate text-foreground">{restaurant.name}</div>
                             <div className="text-xs text-muted-foreground truncate">
                               {restaurant.category} • {avgRating.toFixed(1)}⭐ ({restaurant.reviewCount} reviews)
                             </div>

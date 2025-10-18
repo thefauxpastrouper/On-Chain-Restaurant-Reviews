@@ -7,6 +7,7 @@ import {
   Trash2,
   Settings,
   UtensilsCrossed,
+  BookOpen,
 } from "lucide-react";
 import {
   Sidebar,
@@ -20,7 +21,6 @@ import {
   SidebarHeader,
   SidebarFooter,
 } from "./ui/sidebar";
-import { ConnectWalletButton } from "./ConnectWalletButton";
 
 const menuItems = [
   { title: "Browse Restaurants", url: "/", icon: Home },
@@ -29,6 +29,7 @@ const menuItems = [
   { title: "Update Review", url: "/update-review", icon: Edit },
   { title: "Delete Review", url: "/delete-review", icon: Trash2 },
   { title: "Update Restaurant", url: "/update-restaurant", icon: Settings },
+  { title: "Documentation", url: "/documentation", icon: BookOpen },
 ];
 
 export function AppSidebar() {
@@ -76,9 +77,6 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="border-t border-border p-4">
-        <ConnectWalletButton />
-      </SidebarFooter>
     </Sidebar>
   );
 }

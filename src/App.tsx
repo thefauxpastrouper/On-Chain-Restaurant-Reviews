@@ -13,6 +13,8 @@ import UpdateReview from "./pages/UpdateReview";
 import DeleteReview from "./pages/DeleteReview";
 import UpdateRestaurant from "./pages/UpdateRestaurant";
 import NotFound from "./pages/NotFound";
+import { ConnectWalletButton } from "./components/ConnectWalletButton";
+import { Documentation } from "./components/Documentation";
 
 import { useMemo } from "react";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
@@ -61,22 +63,28 @@ const App = () => {
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <SidebarProvider>
+        <SidebarProvider defaultOpen={false}>
           <div className="flex min-h-screen w-full">
             <AppSidebar />
             <div className="flex-1 flex flex-col">
-              <header className="md:hidden sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-                <div className="flex h-14 items-center px-4 gap-3">
-                  <SidebarTrigger />
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center">
-                      <UtensilsCrossed className="w-5 h-5 text-white" />
+              <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+                <div className="flex h-14 items-center justify-between px-4">
+                  <div className="flex items-center gap-3">
+                    <SidebarTrigger />
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center">
+                        <UtensilsCrossed className="w-5 h-5 text-white" />
+                      </div>
+                      <h1 className="font-bold text-lg">RestaurantChain</h1>
                     </div>
-                    <h1 className="font-bold text-lg">RestaurantChain</h1>
+                  </div>
+                  <div className="flex items-center">
+                    <ConnectWalletButton />
                   </div>
                 </div>
               </header>
               <main className="flex-1 p-6 overflow-auto">
+                <div className="max-w-[1200px] mx-auto">
                 <Routes>
                   <Route path="/" element={<Index />} />
                   <Route path="/register" element={<RegisterRestaurant />} />
@@ -84,8 +92,10 @@ const App = () => {
                   <Route path="/update-review" element={<UpdateReview />} />
                   <Route path="/delete-review" element={<DeleteReview />} />
                   <Route path="/update-restaurant" element={<UpdateRestaurant />} />
+                  <Route path="/documentation" element={<Documentation />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
+                </div>
               </main>
             </div>
           </div>
