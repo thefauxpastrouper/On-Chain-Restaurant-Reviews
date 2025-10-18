@@ -7,8 +7,10 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import { Label } from "./ui/label";
+import { Alert, AlertDescription } from "./ui/alert";
 import { toast } from "sonner";
 import { RestaurantDropdown } from "./RestaurantDropdown";
+import { Info } from "lucide-react";
 
 export const UpdateRestaurant = () => {
   const [restaurantPubkey, setRestaurantPubkey] = useState("");
@@ -47,8 +49,17 @@ export const UpdateRestaurant = () => {
     <Card className="border-border bg-card">
       <CardHeader>
         <CardTitle className="text-2xl">Update Restaurant</CardTitle>
-        <CardDescription>Modify your restaurant information</CardDescription>
+        <CardDescription>
+          Modify your restaurant information. Note: Only the wallet that created the restaurant can update its details.
+        </CardDescription>
       </CardHeader>
+      <Alert className="mb-4">
+        <Info className="h-4 w-4" />
+        <AlertDescription>
+          Only the wallet address that originally registered this restaurant can update its details. 
+          If you didn't create the restaurant, the transaction will fail.
+        </AlertDescription>
+      </Alert>
       <CardContent className="space-y-4">
         <RestaurantDropdown
           value={restaurantPubkey}

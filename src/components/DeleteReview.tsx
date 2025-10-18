@@ -4,8 +4,9 @@ import { getProvider } from "../utils/getProvider";
 import { PROGRAM_ID, IDL } from "../anchor/constants";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
+import { Alert, AlertDescription } from "./ui/alert";
 import { toast } from "sonner";
-import { Trash2 } from "lucide-react";
+import { Trash2, Info } from "lucide-react";
 import { RestaurantDropdown } from "./RestaurantDropdown";
 
 export const DeleteReview = () => {
@@ -56,8 +57,17 @@ export const DeleteReview = () => {
           <Trash2 className="w-6 h-6" />
           Delete Review
         </CardTitle>
-        <CardDescription>Permanently remove your review</CardDescription>
+        <CardDescription>
+          Permanently remove your review. Note: Only the wallet that created the review can delete it.
+        </CardDescription>
       </CardHeader>
+      <Alert className="mb-4">
+        <Info className="h-4 w-4" />
+        <AlertDescription>
+          Only the wallet address that originally submitted this review can delete it. 
+          If you didn't create the review, the transaction will fail.
+        </AlertDescription>
+      </Alert>
       <CardContent className="space-y-4">
         <RestaurantDropdown
           value={restaurantPubkey}

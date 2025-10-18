@@ -6,8 +6,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import { Label } from "./ui/label";
+import { Alert, AlertDescription } from "./ui/alert";
 import { toast } from "sonner";
-import { Star } from "lucide-react";
+import { Star, Info } from "lucide-react";
 import { RestaurantDropdown } from "./RestaurantDropdown";
 
 export const AddReview = () => {
@@ -56,8 +57,17 @@ export const AddReview = () => {
     <Card className="border-border bg-card">
       <CardHeader>
         <CardTitle className="text-2xl">Add Review</CardTitle>
-        <CardDescription>Share your experience</CardDescription>
+        <CardDescription>
+          Share your experience. Note: You can only submit one review per restaurant.
+        </CardDescription>
       </CardHeader>
+      <Alert className="mb-4">
+        <Info className="h-4 w-4" />
+        <AlertDescription>
+          Each wallet address can only submit one review per restaurant. 
+          If you've already reviewed this restaurant, you'll need to update your existing review instead.
+        </AlertDescription>
+      </Alert>
       <CardContent className="space-y-4">
         <RestaurantDropdown
           value={restaurantPubkey}

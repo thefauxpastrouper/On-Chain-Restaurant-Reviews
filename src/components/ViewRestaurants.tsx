@@ -53,7 +53,13 @@ export const ViewRestaurants: React.FC<Props> = ({ program }) => {
             ? r.account.reviewCount.toNumber()
             : r.account.reviewCount,
         }));
-        setRestaurants(parsed);
+        
+        // Sort restaurants alphabetically by name
+        const sortedRestaurants = parsed.sort((a, b) => 
+          a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+        );
+        
+        setRestaurants(sortedRestaurants);
       } catch (err) {
         console.error("Error fetching restaurants:", err);
       }
