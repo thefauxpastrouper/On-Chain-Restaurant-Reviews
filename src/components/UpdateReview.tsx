@@ -3,12 +3,12 @@ import { Program, web3 } from "@coral-xyz/anchor";
 import { getProvider } from "../utils/getProvider";
 import { PROGRAM_ID, IDL } from "../anchor/constants";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
-import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import { Label } from "./ui/label";
 import { toast } from "sonner";
 import { Star } from "lucide-react";
+import { RestaurantDropdown } from "./RestaurantDropdown";
 
 export const UpdateReview = () => {
   const [restaurantPubkey, setRestaurantPubkey] = useState("");
@@ -56,16 +56,12 @@ export const UpdateReview = () => {
         <CardDescription>Modify your existing review</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="restaurant">Restaurant Public Key</Label>
-          <Input
-            id="restaurant"
-            placeholder="Enter restaurant public key"
-            value={restaurantPubkey}
-            onChange={(e) => setRestaurantPubkey(e.target.value)}
-            className="bg-background border-border font-mono text-sm"
-          />
-        </div>
+        <RestaurantDropdown
+          value={restaurantPubkey}
+          onValueChange={setRestaurantPubkey}
+          placeholder="Select restaurant to update review for..."
+          label="Restaurant"
+        />
         <div className="space-y-2">
           <Label>New Rating</Label>
           <div className="flex gap-2">

@@ -36,7 +36,7 @@ export function AppSidebar() {
     <Sidebar className="border-r border-border">
       <SidebarHeader className="border-b border-border p-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center glow-primary">
+          <div className="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center">
             <UtensilsCrossed className="w-6 h-6 text-white" />
           </div>
           <div>

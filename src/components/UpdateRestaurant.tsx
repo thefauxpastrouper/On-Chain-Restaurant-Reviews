@@ -8,6 +8,7 @@ import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import { Label } from "./ui/label";
 import { toast } from "sonner";
+import { RestaurantDropdown } from "./RestaurantDropdown";
 
 export const UpdateRestaurant = () => {
   const [restaurantPubkey, setRestaurantPubkey] = useState("");
@@ -49,16 +50,12 @@ export const UpdateRestaurant = () => {
         <CardDescription>Modify your restaurant information</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="restaurant">Restaurant Public Key</Label>
-          <Input
-            id="restaurant"
-            placeholder="Enter restaurant public key"
-            value={restaurantPubkey}
-            onChange={(e) => setRestaurantPubkey(e.target.value)}
-            className="bg-background border-border font-mono text-sm"
-          />
-        </div>
+        <RestaurantDropdown
+          value={restaurantPubkey}
+          onValueChange={setRestaurantPubkey}
+          placeholder="Select restaurant to update..."
+          label="Restaurant"
+        />
         <div className="space-y-2">
           <Label htmlFor="name">New Name</Label>
           <Input
