@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 const Index = () => {
   const [program, setProgram] = useState<any>(null);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   useEffect(() => {
     try {
@@ -15,6 +16,11 @@ const Index = () => {
     } catch (error) {
       console.error("Failed to initialize program:", error);
     }
+  }, []);
+
+  // Trigger refresh when component mounts (user navigates to this page)
+  useEffect(() => {
+    setRefreshTrigger(prev => prev + 1);
   }, []);
 
   if (!program) {
@@ -28,7 +34,7 @@ const Index = () => {
     );
   }
 
-  return <ViewRestaurants program={program} />;
+  return <ViewRestaurants program={program} refreshTrigger={refreshTrigger} />;
 };
 
 export default Index;

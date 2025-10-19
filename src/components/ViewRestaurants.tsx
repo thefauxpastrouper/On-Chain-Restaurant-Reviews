@@ -4,7 +4,7 @@ import { Program } from "@coral-xyz/anchor";
 import type { RestaurantReviews } from "../types/restaurant_reviews";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
-import { Star, Copy, Check } from "lucide-react";
+import { Star, Copy, Check, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 
 type RestaurantData = {
@@ -28,47 +28,66 @@ type ReviewData = {
 
 type Props = {
   program: Program<RestaurantReviews>;
+  refreshTrigger?: number; // Add refresh trigger prop
 };
 
-export const ViewRestaurants: React.FC<Props> = ({ program }) => {
+export const ViewRestaurants: React.FC<Props> = ({ program, refreshTrigger }) => {
   const [restaurants, setRestaurants] = useState<RestaurantData[]>([]);
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const [copiedKeys, setCopiedKeys] = useState<Record<string, boolean>>({});
   const [reviews, setReviews] = useState<Record<string, ReviewData[]>>({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingReviews, setLoadingReviews] = useState<Record<string, boolean>>({});
+
+  const fetchRestaurants = async () => {
+    try {
+      setIsLoading(true);
+      const allRests = (await (program.account as any).restaurant.all()) as any[];
+      const parsed = allRests.map((r) => ({
+        pubkey: r.publicKey,
+        owner: r.account.owner,
+        name: r.account.name,
+        category: r.account.category,
+        metadataCid: r.account.metadataCid,
+        ratingSum: r.account.ratingSum.toNumber
+          ? r.account.ratingSum.toNumber()
+          : r.account.ratingSum,
+        reviewCount: r.account.reviewCount.toNumber
+          ? r.account.reviewCount.toNumber()
+          : r.account.reviewCount,
+      }));
+      
+      // Sort restaurants alphabetically by name
+      const sortedRestaurants = parsed.sort((a, b) => 
+        a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+      );
+      
+      setRestaurants(sortedRestaurants);
+    } catch (err) {
+      console.error("Error fetching restaurants:", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchRestaurants = async () => {
-      try {
-        const allRests = (await (program.account as any).restaurant.all()) as any[];
-        const parsed = allRests.map((r) => ({
-          pubkey: r.publicKey,
-          owner: r.account.owner,
-          name: r.account.name,
-          category: r.account.category,
-          metadataCid: r.account.metadataCid,
-          ratingSum: r.account.ratingSum.toNumber
-            ? r.account.ratingSum.toNumber()
-            : r.account.ratingSum,
-          reviewCount: r.account.reviewCount.toNumber
-            ? r.account.reviewCount.toNumber()
-            : r.account.reviewCount,
-        }));
-        
-        // Sort restaurants alphabetically by name
-        const sortedRestaurants = parsed.sort((a, b) => 
-          a.name.toLowerCase().localeCompare(b.name.toLowerCase())
-        );
-        
-        setRestaurants(sortedRestaurants);
-      } catch (err) {
-        console.error("Error fetching restaurants:", err);
-      }
-    };
     fetchRestaurants();
   }, [program]);
 
+  // Trigger refresh when refreshTrigger changes
+  useEffect(() => {
+    if (refreshTrigger && refreshTrigger > 0) {
+      fetchRestaurants();
+      // Clear existing reviews to force fresh fetch
+      setReviews({});
+      setExpanded({});
+    }
+  }, [refreshTrigger]);
+
   const fetchReviews = async (restaurantPubkey: anchor.web3.PublicKey) => {
+    const restKey = restaurantPubkey.toBase58();
     try {
+      setLoadingReviews((prev) => ({ ...prev, [restKey]: true }));
       const allReviews = (await (program.account as any).review.all([
         {
           memcmp: {
@@ -91,9 +110,11 @@ export const ViewRestaurants: React.FC<Props> = ({ program }) => {
           : r.account.updatedAt,
       }));
 
-      setReviews((prev) => ({ ...prev, [restaurantPubkey.toBase58()]: parsed }));
+      setReviews((prev) => ({ ...prev, [restKey]: parsed }));
     } catch (err) {
       console.error("Error fetching reviews:", err);
+    } finally {
+      setLoadingReviews((prev) => ({ ...prev, [restKey]: false }));
     }
   };
 
@@ -136,13 +157,26 @@ export const ViewRestaurants: React.FC<Props> = ({ program }) => {
 
   return (
     <div className="space-y-6">
-      <div className="space-y-2">
-        <h1 className="text-4xl font-bold gradient-primary bg-clip-text text-transparent">
-          Browse Restaurants
-        </h1>
-        <p className="text-muted-foreground text-lg">
-          Discover and review restaurants on the blockchain
-        </p>
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <div className="space-y-2">
+            <h1 className="text-4xl font-bold gradient-primary bg-clip-text text-transparent">
+              Browse Restaurants
+            </h1>
+            <p className="text-muted-foreground text-lg">
+              Discover and review restaurants on the blockchain
+            </p>
+          </div>
+          <Button
+            variant="outline"
+            onClick={fetchRestaurants}
+            disabled={isLoading}
+            className="flex items-center gap-2"
+          >
+            <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
+            {isLoading ? 'Refreshing...' : 'Refresh'}
+          </Button>
+        </div>
       </div>
 
       <div className="grid gap-6">
@@ -151,6 +185,7 @@ export const ViewRestaurants: React.FC<Props> = ({ program }) => {
           const isExpanded = expanded[restKey];
           const restReviews = reviews[restKey] || [];
           const avgRating = rest.reviewCount > 0 ? rest.ratingSum / rest.reviewCount : 0;
+          const isReviewsLoading = loadingReviews[restKey] || false;
 
           return (
             <Card key={restKey} className="border-border bg-card overflow-hidden hover:border-primary/50 transition-colors">
@@ -225,15 +260,24 @@ export const ViewRestaurants: React.FC<Props> = ({ program }) => {
                 <Button
                   variant="outline"
                   className="w-full"
+                  disabled={isReviewsLoading}
                   onClick={() => {
                     const newExpanded = !isExpanded;
                     setExpanded((prev) => ({ ...prev, [restKey]: newExpanded }));
-                    if (newExpanded && !reviews[restKey]) {
+                    if (newExpanded) {
+                      // Always refetch reviews when expanding to ensure fresh data
                       fetchReviews(rest.pubkey);
                     }
                   }}
                 >
-                  {isExpanded ? "Hide Reviews" : `Show Reviews (${rest.reviewCount})`}
+                  {isReviewsLoading ? (
+                    <div className="flex items-center gap-2">
+                      <RefreshCw className="w-4 h-4 animate-spin" />
+                      Loading Reviews...
+                    </div>
+                  ) : (
+                    isExpanded ? "Hide Reviews" : `Show Reviews (${rest.reviewCount})`
+                  )}
                 </Button>
 
                 {isExpanded && (
