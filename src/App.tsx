@@ -40,7 +40,7 @@ const App = () => {
   const network = WalletAdapterNetwork.Devnet;
 
   // ⚡ RPC endpoint — you can replace with your own
-  const endpoint = useMemo(() => "https://devnet.helius-rpc.com/?api-key=914ba64f-6706-4ba0-b320-bd35b6371e15", [network]);
+  const endpoint = useMemo(() => RPC_ENDPOINT, [network]);
 
   // 💳 All supported wallets
   const wallets = useMemo(
