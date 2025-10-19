@@ -62,6 +62,8 @@ export default defineConfig(({ mode }) => ({
     __PROD__: mode === "production",
     global: "globalThis",
   },
+  // Load environment variables
+  envPrefix: "",
   // Add polyfills for Node.js globals
   resolve: {
     alias: {

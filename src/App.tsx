@@ -40,7 +40,7 @@ const App = () => {
   const network = WalletAdapterNetwork.Devnet;
 
   // ⚡ RPC endpoint — you can replace with your own
-  const endpoint = useMemo(() => RPC_ENDPOINT, [network]);
+  const endpoint = useMemo(() => import.meta.env.RPC_ENDPOINT, [network]);
 
   // 💳 All supported wallets
   const wallets = useMemo(

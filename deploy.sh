@@ -15,7 +15,7 @@ NC='\033[0m' # No Color
 # Configuration
 APP_NAME="restaurantchain"
 DOMAIN=${DOMAIN:-"your-domain.com"}
-EMAIL=${EMAIL:-"your-email@example.com"}
+EMAIL=${EMAIL:-"work.adityaswaroop@gmail.com"}
 
 echo -e "${BLUE}🚀 RestaurantChain Deployment Script${NC}"
 echo -e "${BLUE}====================================${NC}"
