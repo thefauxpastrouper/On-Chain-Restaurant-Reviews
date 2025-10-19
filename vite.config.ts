@@ -63,7 +63,7 @@ export default defineConfig(({ mode }) => ({
     global: "globalThis",
   },
   // Load environment variables
-  envPrefix: "",
+  envPrefix: "RPC_",
   // Add polyfills for Node.js globals
   resolve: {
     alias: {
