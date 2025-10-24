@@ -531,10 +531,13 @@ const SidebarMenuSkeleton = React.forwardRef<
     showIcon?: boolean;
   }
 >(({ className, showIcon = false, ...props }, ref) => {
-  // Random width between 50 to 90%.
+  // Deterministic width (50%..90%) based on component id to avoid SSR mismatch.
+  const instanceId = React.useId();
   const width = React.useMemo(() => {
-    return `${Math.floor(Math.random() * 40) + 50}%`;
-  }, []);
+    const sumOfCharCodes = Array.from(instanceId).reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+    const normalizedPercent = (sumOfCharCodes % 41) + 50; // 50..90
+    return `${normalizedPercent}%`;
+  }, [instanceId]);
 
   return (
     <div
