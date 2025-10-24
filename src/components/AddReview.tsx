@@ -55,20 +55,20 @@ export const AddReview = () => {
 
   return (
     <Card className="border-border bg-card">
-      <CardHeader>
-        <CardTitle className="text-2xl">Add Review</CardTitle>
-        <CardDescription>
+      <CardHeader className="p-4 md:p-6">
+        <CardTitle className="text-xl md:text-2xl">Add Review</CardTitle>
+        <CardDescription className="text-sm md:text-base">
           Share your experience. Note: You can only submit one review per restaurant.
         </CardDescription>
       </CardHeader>
-      <Alert className="mb-4">
+      <Alert className="mb-3 md:mb-4 mx-4 md:mx-6">
         <Info className="h-4 w-4" />
-        <AlertDescription>
+        <AlertDescription className="text-xs md:text-sm">
           Each wallet address can only submit one review per restaurant. 
           If you've already reviewed this restaurant, you'll need to update your existing review instead.
         </AlertDescription>
       </Alert>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-3 md:space-y-4 p-4 md:p-6">
         <RestaurantDropdown
           value={restaurantPubkey}
           onValueChange={setRestaurantPubkey}

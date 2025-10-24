@@ -46,11 +46,11 @@ export const RegisterRestaurant = () => {
 
   return (
     <Card className="border-border bg-card">
-      <CardHeader>
-        <CardTitle className="text-2xl">Register Restaurant</CardTitle>
-        <CardDescription>Add your restaurant to the blockchain</CardDescription>
+      <CardHeader className="p-4 md:p-6">
+        <CardTitle className="text-xl md:text-2xl">Register Restaurant</CardTitle>
+        <CardDescription className="text-sm md:text-base">Add your restaurant to the blockchain</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-3 md:space-y-4 p-4 md:p-6">
         <div className="space-y-2">
           <Label htmlFor="name">Restaurant Name</Label>
           <Input

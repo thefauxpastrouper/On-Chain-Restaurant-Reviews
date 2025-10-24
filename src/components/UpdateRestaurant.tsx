@@ -47,20 +47,20 @@ export const UpdateRestaurant = () => {
 
   return (
     <Card className="border-border bg-card">
-      <CardHeader>
-        <CardTitle className="text-2xl">Update Restaurant</CardTitle>
-        <CardDescription>
+      <CardHeader className="p-4 md:p-6">
+        <CardTitle className="text-xl md:text-2xl">Update Restaurant</CardTitle>
+        <CardDescription className="text-sm md:text-base">
           Modify your restaurant information. Note: Only the wallet that created the restaurant can update its details.
         </CardDescription>
       </CardHeader>
-      <Alert className="mb-4">
+      <Alert className="mb-3 md:mb-4 mx-4 md:mx-6">
         <Info className="h-4 w-4" />
-        <AlertDescription>
+        <AlertDescription className="text-xs md:text-sm">
           Only the wallet address that originally registered this restaurant can update its details. 
           If you didn't create the restaurant, the transaction will fail.
         </AlertDescription>
       </Alert>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-3 md:space-y-4 p-4 md:p-6">
         <RestaurantDropdown
           value={restaurantPubkey}
           onValueChange={setRestaurantPubkey}

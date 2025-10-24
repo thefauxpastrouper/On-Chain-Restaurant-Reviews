@@ -144,11 +144,11 @@ export const ViewRestaurants: React.FC<Props> = ({ program, refreshTrigger }) =>
 
   if (restaurants.length === 0) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <Card className="border-border bg-card p-8">
-          <CardContent className="text-center space-y-4">
-            <h3 className="text-2xl font-bold">No Restaurants Yet</h3>
-            <p className="text-muted-foreground">Be the first to register a restaurant!</p>
+      <div className="flex items-center justify-center min-h-[300px] md:min-h-[400px]">
+        <Card className="border-border bg-card p-6 md:p-8 mx-4">
+          <CardContent className="text-center space-y-3 md:space-y-4 p-0">
+            <h3 className="text-xl md:text-2xl font-bold">No Restaurants Yet</h3>
+            <p className="text-sm md:text-base text-muted-foreground">Be the first to register a restaurant!</p>
           </CardContent>
         </Card>
       </div>
@@ -156,14 +156,14 @@ export const ViewRestaurants: React.FC<Props> = ({ program, refreshTrigger }) =>
   }
 
   return (
-    <div className="space-y-6">
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <div className="space-y-2">
-            <h1 className="text-4xl font-bold gradient-primary bg-clip-text text-transparent">
+    <div className="space-y-4 md:space-y-6">
+      <div className="space-y-3 md:space-y-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+          <div className="space-y-1 md:space-y-2">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold gradient-primary bg-clip-text text-transparent">
               Browse Restaurants
             </h1>
-            <p className="text-muted-foreground text-lg">
+            <p className="text-muted-foreground text-sm md:text-lg">
               Discover and review restaurants on the blockchain
             </p>
           </div>
@@ -171,15 +171,15 @@ export const ViewRestaurants: React.FC<Props> = ({ program, refreshTrigger }) =>
             variant="outline"
             onClick={fetchRestaurants}
             disabled={isLoading}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 w-full sm:w-auto"
           >
             <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
-            {isLoading ? 'Refreshing...' : 'Refresh'}
+            <span className="sm:inline">{isLoading ? 'Refreshing...' : 'Refresh'}</span>
           </Button>
         </div>
       </div>
 
-      <div className="grid gap-6">
+      <div className="grid gap-4 md:gap-6">
         {restaurants.map((rest) => {
           const restKey = rest.pubkey.toBase58();
           const isExpanded = expanded[restKey];
@@ -189,17 +189,17 @@ export const ViewRestaurants: React.FC<Props> = ({ program, refreshTrigger }) =>
 
           return (
             <Card key={restKey} className="border-border bg-card overflow-hidden hover:border-primary/50 transition-colors">
-              <CardHeader className="border-b border-border">
-                <div className="flex items-start gap-4">
-                  <div className="w-16 h-16 rounded-xl gradient-accent flex items-center justify-center text-white font-bold text-2xl glow-accent">
+              <CardHeader className="border-b border-border p-4 md:p-6">
+                <div className="flex items-start gap-3 md:gap-4">
+                  <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl gradient-accent flex items-center justify-center text-white font-bold text-xl md:text-2xl glow-accent flex-shrink-0">
                     {rest.name.charAt(0).toUpperCase()}
                   </div>
-                  <div className="flex-1 space-y-2">
-                    <CardTitle className="text-3xl">{rest.name}</CardTitle>
-                    <p className="text-muted-foreground">$ • {rest.category}</p>
-                    <div className="flex items-center gap-3">
+                  <div className="flex-1 space-y-1 md:space-y-2 min-w-0">
+                    <CardTitle className="text-xl sm:text-2xl md:text-3xl break-words">{rest.name}</CardTitle>
+                    <p className="text-sm md:text-base text-muted-foreground">$ • {rest.category}</p>
+                    <div className="flex flex-col xs:flex-row items-start xs:items-center gap-2 xs:gap-3">
                       {renderStars(avgRating)}
-                      <span className="text-sm text-muted-foreground">
+                      <span className="text-xs md:text-sm text-muted-foreground">
                         {avgRating.toFixed(1)} ({rest.reviewCount} reviews)
                       </span>
                     </div>
@@ -207,8 +207,8 @@ export const ViewRestaurants: React.FC<Props> = ({ program, refreshTrigger }) =>
                 </div>
               </CardHeader>
 
-              <CardContent className="space-y-4 pt-6">
-                <div className="grid grid-cols-2 gap-4">
+              <CardContent className="space-y-3 md:space-y-4 p-4 md:pt-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                   <div className="relative aspect-video bg-muted rounded-lg overflow-hidden">
                     <img
                       src={`https://placehold.co/400x300/3b3b4f/fff?text=${encodeURIComponent(rest.name)}`}
@@ -225,33 +225,33 @@ export const ViewRestaurants: React.FC<Props> = ({ program, refreshTrigger }) =>
                   </div>
                 </div>
 
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-center gap-2">
-                    <span className="text-muted-foreground w-32">Restaurant:</span>
+                <div className="space-y-2 text-xs md:text-sm">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                    <span className="text-muted-foreground sm:w-32 font-medium">Restaurant:</span>
                     <button
                       onClick={() => copyToClipboard(rest.pubkey.toBase58(), "restaurant-" + restKey)}
-                      className="flex items-center gap-2 text-primary hover:text-primary/80 font-mono text-xs flex-1 truncate"
+                      className="flex items-center gap-2 text-primary hover:text-primary/80 font-mono text-[10px] md:text-xs flex-1 truncate min-w-0 text-left"
                     >
-                      {rest.pubkey.toBase58()}
+                      <span className="truncate">{rest.pubkey.toBase58()}</span>
                       {copiedKeys["restaurant-" + restKey] ? (
-                        <Check className="w-4 h-4" />
+                        <Check className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
                       ) : (
-                        <Copy className="w-4 h-4" />
+                        <Copy className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
                       )}
                     </button>
                   </div>
 
-                  <div className="flex items-center gap-2">
-                    <span className="text-muted-foreground w-32">Owner:</span>
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                    <span className="text-muted-foreground sm:w-32 font-medium">Owner:</span>
                     <button
                       onClick={() => copyToClipboard(rest.owner.toBase58(), "owner-" + restKey)}
-                      className="flex items-center gap-2 text-primary hover:text-primary/80 font-mono text-xs flex-1 truncate"
+                      className="flex items-center gap-2 text-primary hover:text-primary/80 font-mono text-[10px] md:text-xs flex-1 truncate min-w-0 text-left"
                     >
-                      {rest.owner.toBase58()}
+                      <span className="truncate">{rest.owner.toBase58()}</span>
                       {copiedKeys["owner-" + restKey] ? (
-                        <Check className="w-4 h-4" />
+                        <Check className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
                       ) : (
-                        <Copy className="w-4 h-4" />
+                        <Copy className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
                       )}
                     </button>
                   </div>
@@ -281,14 +281,14 @@ export const ViewRestaurants: React.FC<Props> = ({ program, refreshTrigger }) =>
                 </Button>
 
                 {isExpanded && (
-                  <div className="space-y-3 pt-4 border-t border-border">
+                  <div className="space-y-2 md:space-y-3 pt-3 md:pt-4 border-t border-border">
                     {restReviews.length > 0 ? (
                       restReviews.map((rev) => (
                         <Card key={rev.pubkey.toBase58()} className="bg-background border-border">
-                          <CardContent className="p-4 space-y-3">
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-2">
-                                <div className="w-8 h-8 rounded-full gradient-primary flex items-center justify-center text-white text-xs font-bold">
+                          <CardContent className="p-3 md:p-4 space-y-2 md:space-y-3">
+                            <div className="flex flex-col xs:flex-row items-start xs:items-center justify-between gap-2">
+                              <div className="flex items-center gap-2 min-w-0 flex-1">
+                                <div className="w-7 h-7 md:w-8 md:h-8 rounded-full gradient-primary flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
                                   {rev.reviewer.toBase58().slice(0, 2).toUpperCase()}
                                 </div>
                                 <button
@@ -298,17 +298,19 @@ export const ViewRestaurants: React.FC<Props> = ({ program, refreshTrigger }) =>
                                       "reviewer-" + rev.pubkey.toBase58()
                                     )
                                   }
-                                  className="text-primary hover:text-primary/80 font-mono text-xs"
+                                  className="text-primary hover:text-primary/80 font-mono text-[10px] md:text-xs truncate"
                                 >
                                   {rev.reviewer.toBase58().slice(0, 12)}...
                                 </button>
                               </div>
-                              {renderStars(rev.rating)}
+                              <div className="flex-shrink-0">
+                                {renderStars(rev.rating)}
+                              </div>
                             </div>
-                            <p className="text-sm text-muted-foreground">
+                            <p className="text-xs md:text-sm text-muted-foreground break-words">
                               {rev.reviewCid}
                             </p>
-                            <div className="flex gap-4 text-xs text-muted-foreground">
+                            <div className="flex flex-col xs:flex-row gap-2 xs:gap-4 text-[10px] md:text-xs text-muted-foreground">
                               <span>Created: {new Date(rev.createdAt * 1000).toLocaleDateString()}</span>
                               <span>Updated: {new Date(rev.updatedAt * 1000).toLocaleDateString()}</span>
                             </div>
@@ -316,7 +318,7 @@ export const ViewRestaurants: React.FC<Props> = ({ program, refreshTrigger }) =>
                         </Card>
                       ))
                     ) : (
-                      <p className="text-center text-muted-foreground py-4">No reviews yet</p>
+                      <p className="text-center text-sm md:text-base text-muted-foreground py-3 md:py-4">No reviews yet</p>
                     )}
                   </div>
                 )}

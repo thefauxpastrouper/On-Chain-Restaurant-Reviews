@@ -52,23 +52,23 @@ export const DeleteReview = () => {
 
   return (
     <Card className="border-border bg-card">
-      <CardHeader>
-        <CardTitle className="text-2xl flex items-center gap-2">
-          <Trash2 className="w-6 h-6" />
+      <CardHeader className="p-4 md:p-6">
+        <CardTitle className="text-xl md:text-2xl flex items-center gap-2">
+          <Trash2 className="w-5 h-5 md:w-6 md:h-6" />
           Delete Review
         </CardTitle>
-        <CardDescription>
+        <CardDescription className="text-sm md:text-base">
           Permanently remove your review. Note: Only the wallet that created the review can delete it.
         </CardDescription>
       </CardHeader>
-      <Alert className="mb-4">
+      <Alert className="mb-3 md:mb-4 mx-4 md:mx-6">
         <Info className="h-4 w-4" />
-        <AlertDescription>
+        <AlertDescription className="text-xs md:text-sm">
           Only the wallet address that originally submitted this review can delete it. 
           If you didn't create the review, the transaction will fail.
         </AlertDescription>
       </Alert>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-3 md:space-y-4 p-4 md:p-6">
         <RestaurantDropdown
           value={restaurantPubkey}
           onValueChange={setRestaurantPubkey}
