@@ -159,19 +159,22 @@ export const ViewRestaurants: React.FC<Props> = ({ program, refreshTrigger }) =>
     <div className="space-y-6">
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <div className="space-y-2">
-            <h1 className="text-4xl font-bold gradient-primary bg-clip-text text-transparent">
-              Browse Restaurants
-            </h1>
-            <p className="text-muted-foreground text-lg">
-              Discover and review restaurants on the blockchain
-            </p>
+          <div className="space-y-2 relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 via-purple-400/20 to-pink-400/20 rounded-lg blur-xl"></div>
+            <div className="relative z-10">
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                Browse Restaurants
+              </h1>
+              <p className="text-muted-foreground text-lg">
+                Discover and review restaurants on the blockchain
+              </p>
+            </div>
           </div>
           <Button
             variant="outline"
             onClick={fetchRestaurants}
             disabled={isLoading}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 bg-gradient-to-r from-blue-50 to-purple-50 hover:from-blue-100 hover:to-purple-100 border-blue-200 hover:border-blue-300 transition-all duration-300"
           >
             <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
             {isLoading ? 'Refreshing...' : 'Refresh'}
@@ -188,11 +191,20 @@ export const ViewRestaurants: React.FC<Props> = ({ program, refreshTrigger }) =>
           const isReviewsLoading = loadingReviews[restKey] || false;
 
           return (
-            <Card key={restKey} className="border-border bg-card overflow-hidden hover:border-primary/50 transition-colors">
-              <CardHeader className="border-b border-border">
+            <Card key={restKey} className="border-border bg-card overflow-hidden hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 group">
+              <CardHeader className="border-b border-border relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-50/30 via-purple-50/30 to-pink-50/30 opacity-50"></div>
+                <div className="relative z-10">
                 <div className="flex items-start gap-4">
-                  <div className="w-16 h-16 rounded-xl gradient-accent flex items-center justify-center text-white font-bold text-2xl glow-accent">
-                    {rest.name.charAt(0).toUpperCase()}
+                  <div className="w-16 h-16 rounded-xl relative overflow-hidden group">
+                    <div className="absolute inset-0 bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-600"></div>
+                    <div className="absolute inset-0 bg-gradient-to-tl from-yellow-300 via-pink-400 to-purple-500 opacity-70"></div>
+                    <div className="absolute inset-0 flex items-center justify-center z-10">
+                      <span className="text-white font-bold text-2xl group-hover:scale-110 transition-transform duration-300 leading-none">
+                        {rest.name.charAt(0).toUpperCase()}
+                      </span>
+                    </div>
+                    <div className="absolute inset-0 bg-white/10 group-hover:bg-white/20 transition-all duration-300"></div>
                   </div>
                   <div className="flex-1 space-y-2">
                     <CardTitle className="text-3xl">{rest.name}</CardTitle>
@@ -205,23 +217,34 @@ export const ViewRestaurants: React.FC<Props> = ({ program, refreshTrigger }) =>
                     </div>
                   </div>
                 </div>
+                </div>
               </CardHeader>
 
               <CardContent className="space-y-4 pt-6">
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="relative aspect-video bg-muted rounded-lg overflow-hidden">
-                    <img
-                      src={`https://placehold.co/400x300/3b3b4f/fff?text=${encodeURIComponent(rest.name)}`}
-                      alt={rest.name}
-                      className="w-full h-full object-cover"
-                    />
+                  <div className="relative aspect-video rounded-lg overflow-hidden group">
+                    <div className="absolute inset-0 bg-gradient-to-br from-orange-400 via-red-500 to-pink-600 opacity-90"></div>
+                    <div className="absolute inset-0 bg-gradient-to-tl from-yellow-300 via-orange-400 to-red-500 opacity-70"></div>
+                    <div className="relative z-10 flex items-center justify-center h-full">
+                      <div className="text-center text-white">
+                        <div className="text-4xl mb-2">🍽️</div>
+                        <div className="text-lg font-bold drop-shadow-lg">{rest.name}</div>
+                        <div className="text-sm opacity-90">Restaurant</div>
+                      </div>
+                    </div>
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
                   </div>
-                  <div className="relative aspect-video bg-muted rounded-lg overflow-hidden">
-                    <img
-                      src={`https://placehold.co/400x300/2d2d3a/fff?text=${encodeURIComponent(rest.category)}`}
-                      alt={rest.category}
-                      className="w-full h-full object-cover"
-                    />
+                  <div className="relative aspect-video rounded-lg overflow-hidden group">
+                    <div className="absolute inset-0 bg-gradient-to-br from-green-400 via-blue-500 to-purple-600 opacity-90"></div>
+                    <div className="absolute inset-0 bg-gradient-to-tl from-teal-300 via-green-400 to-blue-500 opacity-70"></div>
+                    <div className="relative z-10 flex items-center justify-center h-full">
+                      <div className="text-center text-white">
+                        <div className="text-4xl mb-2">🏷️</div>
+                        <div className="text-lg font-bold drop-shadow-lg">{rest.category}</div>
+                        <div className="text-sm opacity-90">Category</div>
+                      </div>
+                    </div>
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
                   </div>
                 </div>
 
@@ -259,7 +282,7 @@ export const ViewRestaurants: React.FC<Props> = ({ program, refreshTrigger }) =>
 
                 <Button
                   variant="outline"
-                  className="w-full"
+                  className="w-full bg-gradient-to-r from-emerald-50 to-cyan-50 hover:from-emerald-100 hover:to-cyan-100 border-emerald-200 hover:border-emerald-300 transition-all duration-300"
                   disabled={isReviewsLoading}
                   onClick={() => {
                     const newExpanded = !isExpanded;
@@ -288,8 +311,12 @@ export const ViewRestaurants: React.FC<Props> = ({ program, refreshTrigger }) =>
                           <CardContent className="p-4 space-y-3">
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-2">
-                                <div className="w-8 h-8 rounded-full gradient-primary flex items-center justify-center text-white text-xs font-bold">
-                                  {rev.reviewer.toBase58().slice(0, 2).toUpperCase()}
+                                <div className="w-8 h-8 rounded-full relative overflow-hidden group">
+                                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-400 via-cyan-500 to-blue-600"></div>
+                                  <div className="absolute inset-0 bg-gradient-to-tl from-green-300 via-emerald-400 to-cyan-500 opacity-70"></div>
+                                  <div className="relative z-10 flex items-center justify-center text-white text-xs font-bold drop-shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                    {rev.reviewer.toBase58().slice(0, 2).toUpperCase()}
+                                  </div>
                                 </div>
                                 <button
                                   onClick={() =>
