@@ -152,8 +152,8 @@ export const Documentation = () => {
             <div className="grid gap-4 md:grid-cols-2">
               {features
                 .filter(feature => feature.category === category)
-                .map((feature, index) => (
-                  <div key={index} className="flex items-start gap-3 p-4 rounded-lg border hover:bg-accent/5 transition-colors">
+                .map((feature) => (
+                  <div key={feature.title} className="flex items-start gap-3 p-4 rounded-lg border hover:bg-accent/5 transition-colors">
                     <div className="text-primary mt-1">{feature.icon}</div>
                     <div className="flex-1">
                       <h3 className="font-semibold mb-1">{feature.title}</h3>
@@ -638,8 +638,8 @@ pub enum ErrorCode {
         </CardHeader>
         <CardContent>
           <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
-            {techStack.map((tech, index) => (
-              <div key={index} className="flex items-center gap-2 p-3 rounded-lg border">
+            {techStack.map((tech) => (
+              <div key={tech.name} className="flex items-center gap-2 p-3 rounded-lg border">
                 <Badge variant="secondary">{tech.name}</Badge>
                 <span className="text-sm text-muted-foreground">{tech.description}</span>
               </div>
