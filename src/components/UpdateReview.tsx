@@ -51,11 +51,11 @@ export const UpdateReview = () => {
 
   return (
     <Card className="border-border bg-card">
-      <CardHeader>
-        <CardTitle className="text-2xl">Update Review</CardTitle>
-        <CardDescription>Modify your existing review</CardDescription>
+      <CardHeader className="p-4 md:p-6">
+        <CardTitle className="text-xl md:text-2xl">Update Review</CardTitle>
+        <CardDescription className="text-sm md:text-base">Modify your existing review</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-3 md:space-y-4 p-4 md:p-6">
         <RestaurantDropdown
           value={restaurantPubkey}
           onValueChange={setRestaurantPubkey}

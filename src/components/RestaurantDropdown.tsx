@@ -97,26 +97,26 @@ export const RestaurantDropdown: React.FC<RestaurantDropdownProps> = ({
               variant="outline"
               role="combobox"
               aria-expanded={open}
-              className="flex-1 justify-between bg-background border-border"
+              className="flex-1 justify-between bg-background border-border text-sm md:text-base h-auto min-h-[44px] py-2"
             >
               {selectedRestaurant ? (
-                <div className="flex items-center gap-2 truncate">
-                  <Building2 className="w-4 h-4 text-primary" />
-                  <span className="truncate text-foreground font-medium">{selectedRestaurant.name}</span>
-                  <span className="text-xs text-muted-foreground">
+                <div className="flex items-center gap-1.5 md:gap-2 truncate min-w-0">
+                  <Building2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary flex-shrink-0" />
+                  <span className="truncate text-foreground font-medium text-xs md:text-sm">{selectedRestaurant.name}</span>
+                  <span className="hidden sm:inline text-xs text-muted-foreground">
                     ({selectedRestaurant.pubkey.toBase58().slice(0, 8)}...)
                   </span>
                 </div>
               ) : (
-                <span className="text-muted-foreground">{placeholder}</span>
+                <span className="text-muted-foreground text-xs md:text-sm">{placeholder}</span>
               )}
-              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+              <ChevronsUpDown className="ml-1.5 md:ml-2 h-3.5 w-3.5 md:h-4 md:w-4 shrink-0 opacity-50" />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-full p-0" align="start">
+          <PopoverContent className="w-[calc(100vw-2rem)] sm:w-full p-0" align="start">
             <Command>
-              <CommandInput placeholder="Search restaurants..." />
-              <CommandList>
+              <CommandInput placeholder="Search restaurants..." className="text-sm" />
+              <CommandList className="max-h-[300px]">
                 <CommandEmpty>
                   {loading ? "Loading restaurants..." : "No restaurants found."}
                 </CommandEmpty>
@@ -132,24 +132,24 @@ export const RestaurantDropdown: React.FC<RestaurantDropdownProps> = ({
                         key={pubkey}
                         value={`${restaurant.name} ${pubkey}`}
                         onSelect={() => handleSelect(pubkey)}
-                        className="flex items-center justify-between p-3 hover:bg-accent/10 focus:bg-accent/10"
+                        className="flex items-center justify-between p-2 md:p-3 hover:bg-accent/10 focus:bg-accent/10"
                       >
-                        <div className="flex items-center gap-3 flex-1 min-w-0">
-                          <Building2 className="w-4 h-4 text-primary flex-shrink-0" />
+                        <div className="flex items-center gap-2 md:gap-3 flex-1 min-w-0">
+                          <Building2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary flex-shrink-0" />
                           <div className="flex-1 min-w-0">
-                            <div className="font-medium truncate text-foreground">{restaurant.name}</div>
-                            <div className="text-xs text-muted-foreground truncate">
-                              {restaurant.category} • {avgRating.toFixed(1)}⭐ ({restaurant.reviewCount} reviews)
+                            <div className="font-medium truncate text-foreground text-sm md:text-base">{restaurant.name}</div>
+                            <div className="text-[10px] md:text-xs text-muted-foreground truncate">
+                              {restaurant.category} • {avgRating.toFixed(1)}⭐ ({restaurant.reviewCount})
                             </div>
                           </div>
                         </div>
-                        <div className="flex items-center gap-2 ml-2">
-                          <div className="text-xs font-mono text-muted-foreground">
+                        <div className="flex items-center gap-1 md:gap-2 ml-1 md:ml-2">
+                          <div className="hidden sm:block text-[10px] md:text-xs font-mono text-muted-foreground">
                             {pubkey.slice(0, 8)}...{pubkey.slice(-4)}
                           </div>
                           <Check
                             className={cn(
-                              "h-4 w-4",
+                              "h-3.5 w-3.5 md:h-4 md:w-4 flex-shrink-0",
                               value === pubkey ? "opacity-100" : "opacity-0"
                             )}
                           />
@@ -166,7 +166,7 @@ export const RestaurantDropdown: React.FC<RestaurantDropdownProps> = ({
       
       {/* Manual input field for direct public key entry */}
       <div className="space-y-1">
-        <Label htmlFor="manual-input" className="text-xs text-muted-foreground">
+        <Label htmlFor="manual-input" className="text-[10px] md:text-xs text-muted-foreground">
           Or enter public key manually:
         </Label>
         <Input
@@ -174,7 +174,7 @@ export const RestaurantDropdown: React.FC<RestaurantDropdownProps> = ({
           placeholder="Enter restaurant public key"
           value={value}
           onChange={(e) => handleInputChange(e.target.value)}
-          className="bg-background border-border font-mono text-sm"
+          className="bg-background border-border font-mono text-xs md:text-sm"
         />
       </div>
     </div>

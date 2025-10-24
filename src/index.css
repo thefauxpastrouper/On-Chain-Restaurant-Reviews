@@ -129,5 +129,38 @@ All colors MUST be HSL.
   .transition-smooth {
     transition: all 0.2s ease-in-out;
   }
+
+  /* Mobile optimizations */
+  @media (max-width: 640px) {
+    /* Improve tap targets on mobile */
+    button, a, [role="button"] {
+      min-height: 44px;
+      min-width: 44px;
+    }
+
+    /* Reduce motion for mobile if preferred */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  }
+
+  /* Better scrolling on mobile */
+  @supports (-webkit-overflow-scrolling: touch) {
+    .overflow-auto,
+    .overflow-scroll {
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+
+  /* Prevent text size adjustment on mobile */
+  html {
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
 }
 
