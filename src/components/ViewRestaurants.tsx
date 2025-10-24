@@ -158,12 +158,12 @@ export const ViewRestaurants: React.FC<Props> = ({ program, refreshTrigger }) =>
   return (
     <div className="space-y-6">
       <div className="space-y-4">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-2">
-            <h1 className="text-4xl font-bold gradient-primary bg-clip-text text-transparent">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold gradient-primary bg-clip-text text-transparent">
               Browse Restaurants
             </h1>
-            <p className="text-muted-foreground text-lg">
+            <p className="text-muted-foreground text-sm sm:text-base">
               Discover and review restaurants on the blockchain
             </p>
           </div>
@@ -171,7 +171,7 @@ export const ViewRestaurants: React.FC<Props> = ({ program, refreshTrigger }) =>
             variant="outline"
             onClick={fetchRestaurants}
             disabled={isLoading}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 w-full sm:w-auto"
           >
             <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
             {isLoading ? 'Refreshing...' : 'Refresh'}
@@ -191,11 +191,11 @@ export const ViewRestaurants: React.FC<Props> = ({ program, refreshTrigger }) =>
             <Card key={restKey} className="border-border bg-card overflow-hidden hover:border-primary/50 transition-colors">
               <CardHeader className="border-b border-border">
                 <div className="flex items-start gap-4">
-                  <div className="w-16 h-16 rounded-xl gradient-accent flex items-center justify-center text-white font-bold text-2xl glow-accent">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl gradient-accent flex items-center justify-center text-white font-bold text-xl sm:text-2xl glow-accent">
                     {rest.name.charAt(0).toUpperCase()}
                   </div>
                   <div className="flex-1 space-y-2">
-                    <CardTitle className="text-3xl">{rest.name}</CardTitle>
+                    <CardTitle className="text-xl sm:text-2xl">{rest.name}</CardTitle>
                     <p className="text-muted-foreground">$ • {rest.category}</p>
                     <div className="flex items-center gap-3">
                       {renderStars(avgRating)}
@@ -208,7 +208,7 @@ export const ViewRestaurants: React.FC<Props> = ({ program, refreshTrigger }) =>
               </CardHeader>
 
               <CardContent className="space-y-4 pt-6">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="relative aspect-video bg-muted rounded-lg overflow-hidden">
                     <img
                       src={`https://placehold.co/400x300/3b3b4f/fff?text=${encodeURIComponent(rest.name)}`}
@@ -227,10 +227,10 @@ export const ViewRestaurants: React.FC<Props> = ({ program, refreshTrigger }) =>
 
                 <div className="space-y-2 text-sm">
                   <div className="flex items-center gap-2">
-                    <span className="text-muted-foreground w-32">Restaurant:</span>
+                    <span className="text-muted-foreground w-24 sm:w-32 text-xs sm:text-sm">Restaurant:</span>
                     <button
                       onClick={() => copyToClipboard(rest.pubkey.toBase58(), "restaurant-" + restKey)}
-                      className="flex items-center gap-2 text-primary hover:text-primary/80 font-mono text-xs flex-1 truncate"
+                      className="flex items-center gap-2 text-primary hover:text-primary/80 font-mono text-[11px] sm:text-xs flex-1 truncate"
                     >
                       {rest.pubkey.toBase58()}
                       {copiedKeys["restaurant-" + restKey] ? (
@@ -242,10 +242,10 @@ export const ViewRestaurants: React.FC<Props> = ({ program, refreshTrigger }) =>
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <span className="text-muted-foreground w-32">Owner:</span>
+                    <span className="text-muted-foreground w-24 sm:w-32 text-xs sm:text-sm">Owner:</span>
                     <button
                       onClick={() => copyToClipboard(rest.owner.toBase58(), "owner-" + restKey)}
-                      className="flex items-center gap-2 text-primary hover:text-primary/80 font-mono text-xs flex-1 truncate"
+                      className="flex items-center gap-2 text-primary hover:text-primary/80 font-mono text-[11px] sm:text-xs flex-1 truncate"
                     >
                       {rest.owner.toBase58()}
                       {copiedKeys["owner-" + restKey] ? (
@@ -286,7 +286,7 @@ export const ViewRestaurants: React.FC<Props> = ({ program, refreshTrigger }) =>
                       restReviews.map((rev) => (
                         <Card key={rev.pubkey.toBase58()} className="bg-background border-border">
                           <CardContent className="p-4 space-y-3">
-                            <div className="flex items-center justify-between">
+                            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                               <div className="flex items-center gap-2">
                                 <div className="w-8 h-8 rounded-full gradient-primary flex items-center justify-center text-white text-xs font-bold">
                                   {rev.reviewer.toBase58().slice(0, 2).toUpperCase()}
@@ -308,7 +308,7 @@ export const ViewRestaurants: React.FC<Props> = ({ program, refreshTrigger }) =>
                             <p className="text-sm text-muted-foreground">
                               {rev.reviewCid}
                             </p>
-                            <div className="flex gap-4 text-xs text-muted-foreground">
+                            <div className="flex flex-col sm:flex-row sm:gap-4 gap-1 text-xs text-muted-foreground">
                               <span>Created: {new Date(rev.createdAt * 1000).toLocaleDateString()}</span>
                               <span>Updated: {new Date(rev.updatedAt * 1000).toLocaleDateString()}</span>
                             </div>

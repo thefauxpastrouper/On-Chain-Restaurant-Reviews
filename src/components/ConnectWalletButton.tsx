@@ -5,7 +5,7 @@ export const ConnectWalletButton = () => {
   return (
     <div className="flex justify-center">
       <WalletMultiButton 
-        className="!bg-primary hover:!bg-primary/90 !rounded-lg !px-4 !py-2 !font-medium !text-sm !transition-colors !min-w-[160px] !justify-center" 
+        className="!bg-primary hover:!bg-primary/90 !rounded-lg !px-3 sm:!px-4 !py-2 !font-medium !text-xs sm:!text-sm !transition-colors !min-w-[130px] sm:!min-w-[160px] !justify-center" 
       />
     </div>
   );

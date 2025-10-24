@@ -64,18 +64,18 @@ const App = () => {
       <Sonner />
       <BrowserRouter>
         <SidebarProvider defaultOpen={false}>
-          <div className="flex min-h-screen w-full">
+          <div className="flex min-h-svh w-full overflow-hidden">
             <AppSidebar />
             <div className="flex-1 flex flex-col">
               <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-                <div className="flex h-14 items-center justify-between px-4">
-                  <div className="flex items-center gap-3">
+                <div className="flex h-14 items-center justify-between px-3 sm:px-6 pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]">
+                  <div className="flex items-center gap-2 sm:gap-3">
                     <SidebarTrigger />
                     <div className="flex items-center gap-2">
                       <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center">
                         <UtensilsCrossed className="w-5 h-5 text-white" />
                       </div>
-                      <h1 className="font-bold text-lg">RestaurantChain</h1>
+                      <h1 className="font-bold text-base sm:text-lg">RestaurantChain</h1>
                     </div>
                   </div>
                   <div className="flex items-center">
@@ -83,7 +83,7 @@ const App = () => {
                   </div>
                 </div>
               </header>
-              <main className="flex-1 p-6 overflow-auto">
+              <main className="flex-1 overflow-y-auto px-4 py-5 sm:px-6 sm:py-6 pb-[env(safe-area-inset-bottom)]">
                 <div className="max-w-[1200px] mx-auto">
                 <Routes>
                   <Route path="/" element={<Index />} />
