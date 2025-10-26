@@ -311,11 +311,13 @@ export const ViewRestaurants: React.FC<Props> = ({ program, refreshTrigger }) =>
                           <CardContent className="p-4 space-y-3">
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-2">
-                                <div className="w-8 h-8 rounded-full relative overflow-hidden group">
+                                <div className="w-8 h-8 rounded-full relative overflow-hidden group flex items-center justify-center">
                                   <div className="absolute inset-0 bg-gradient-to-br from-emerald-400 via-cyan-500 to-blue-600"></div>
                                   <div className="absolute inset-0 bg-gradient-to-tl from-green-300 via-emerald-400 to-cyan-500 opacity-70"></div>
-                                  <div className="relative z-10 flex items-center justify-center text-white text-xs font-bold drop-shadow-lg group-hover:scale-110 transition-transform duration-300">
-                                    {rev.reviewer.toBase58().slice(0, 2).toUpperCase()}
+                                  <div className="relative z-10 flex items-center justify-center text-white text-xs font-bold drop-shadow-lg group-hover:scale-110 transition-transform duration-300 w-full h-full">
+                                    <span className="flex items-center justify-center w-full h-full leading-none">
+                                      {rev.reviewer.toBase58().slice(0, 2).toUpperCase()}
+                                    </span>
                                   </div>
                                 </div>
                                 <button
